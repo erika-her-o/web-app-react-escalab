@@ -22,7 +22,7 @@ class App extends React.Component {
 
   //ciclos de vida -live cyles
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth )=> {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
@@ -30,7 +30,7 @@ class App extends React.Component {
           this.setState({
             currentUser: {
               id: snapShot.id,
-              ...snapShop.data()
+              ...snapShot.data()
             }
           });
 
@@ -46,12 +46,17 @@ class App extends React.Component {
   };
 
   render() {
-    <div>
-      <Header />
-      <Switch />
-    </div>
+    return (
+      <div>
+        <Header />
+        <Switch>
+            <Route exact path= "/" component={ HomePage } />
+            <Route path="/shop" component={ ShopPage } />
+            <Route path="/shop" component={ SignInAndSignUpPage } />
+        </Switch>
+      </div>
+    );
   }
-
 }
 
 export default App;
