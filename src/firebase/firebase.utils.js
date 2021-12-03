@@ -19,7 +19,7 @@ const config = {
 firebase.initializeApp(config);
 
 //function for create-documents
-export const createUserProfileDocument = async (eserAuth, additionalData)=> {
+export const createUserProfileDocument = async (userAuth, additionalData)=> {
     if(!userAuth) return;
 
     const userRef = firestore.doc(`users/${userAuth.uuid}`);

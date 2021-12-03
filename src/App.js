@@ -21,6 +21,36 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   //ciclos de vida -live cyles
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShop.data()
+            }
+          });
+
+          console.log(this.state);
+        });
+      }
+      this.setState({ currentUser: userAuth });
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  };
+
+  render() {
+    <div>
+      <Header />
+      <Switch />
+    </div>
+  }
 
 }
 
