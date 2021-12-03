@@ -46,6 +46,7 @@ class App extends React.Component {
     this.unsubscribeFromAuth();
   };
 
+  //pattern design: render props
   render() {
     return (
       <div>
