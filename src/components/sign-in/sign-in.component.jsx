@@ -7,6 +7,10 @@ import { signInWithGoogle } from "../../firebase/firebase.utils";
 
 import "./sign-in.styles.scss";
 
-const SignIn = () => <p>Hello am SignIn</p>;
+class SignIn extends React.Component {
+    constructor(props) {
+        super()
+    }
+}
 
 export default SignIn;
