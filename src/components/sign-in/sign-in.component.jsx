@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
@@ -20,16 +19,20 @@ class SignIn extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
     this.setState({ email: "", password: "" });
   };
 
   handleChange = (event) => {
     const { value, name } = event.target; // name, value
+
     this.setState({ [name]: value });
+
+    console.log(this.state);
   };
 
- // design pattern: controlled input
- render() {
+  // design pattern: controlled input
+  render() {
     return (
       <div className="sign-in">
         <h2>I already have an account</h2>
@@ -44,20 +47,18 @@ class SignIn extends React.Component {
             label="email"
             required
           />
-
           <FormInput
-            name="password"
+            name="password" props
             type="password"
             handleChange={this.handleChange}
             value={this.state.password}
             label="password"
             required
           />
-
           <div className="buttons">
-            <CustomButton type="submit">Sign In</CustomButton>
+            <CustomButton type="submit">Sign in</CustomButton>
             <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
-              Sign in with Google
+              Sign in with google
             </CustomButton>
           </div>
         </form>

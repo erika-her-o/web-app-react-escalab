@@ -21,41 +21,42 @@ class App extends React.Component {
 
   unsubscribeFromAuth = null;
 
-  //ciclos de vida -live cyles
+  // life cycles: mount, updateMount, willunmount
+
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth )=> {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot(snapShot => {
+        userRef.onSnapshot((snapShot) => {
           this.setState({
             currentUser: {
               id: snapShot.id,
-              ...snapShot.data()
-            }
+              ...snapShot.data(),
+            },
           });
 
           console.log(this.state);
         });
       }
+
       this.setState({ currentUser: userAuth });
     });
   }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
-  };
+  }
 
-  //pattern design: render props
   render() {
     return (
       <div>
-        <Header currentUser = { this.state.currentUser } />
+        <Header currentUser={this.state.currentUser}/>
         <Switch>
-            <Route exact path= "/" component = { HomePage } />
-            <Route path="/shop" component = { ShopPage } />
-            <Route path="/shop" component = { SignInAndSignUpPage } />
-        </Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/signin" component={SignInAndSignUpPage} />
+        </Switch> 
       </div>
     );
   }
